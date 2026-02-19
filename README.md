@@ -50,6 +50,20 @@ npm notice To update run: npm install -g npm@11.10.0
 npm notice
 ```
 
+# tailwindcssをインストール
+- [Install Tailwind CSS with Astro](https://tailwindcss.com/docs/installation/framework-guides/astro)
+
+```
+ $ npm install tailwindcss @tailwindcss/vite
+
+added 20 packages, and audited 356 packages in 10s
+
+193 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
 # Astro Starter Kit: Blog
 
 ```sh
