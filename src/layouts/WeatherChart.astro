@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { metadata } = Astro.props;
+---
+
+<html lang="jp">
+	<head>
+		<BaseHead title={metadata.id + " " + metadata.title} description={metadata.id} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>{metadata.title}</h1>
+			<h2>{metadata.released_at_j}</h2>
+			<hr />
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,20 @@
+---
+import { type CollectionEntry } from 'astro:content';
+import WeatherChart from '../../layouts/WeatherChart.astro';
+
+export async function getStaticPaths() {
+  const allDetail = (await import("../../data/all_detail.json")).default;
+
+  return Object.entries(allDetail).map(([key, value]) => ({
+    params: { slug: key },
+    props: value
+  }));
+}
+
+const wc = Astro.props;
+//const { Content } = await render(post);
+---
+
+<WeatherChart {...Astro.props}>
+	<div></div>
+</WeatherChart>
