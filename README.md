@@ -64,6 +64,14 @@ added 20 packages, and audited 356 packages in 10s
 found 0 vulnerabilities
 ```
 
+# Astro Cloudinary のインストール
+- [Astro製のブログにCloudinaryを導入する](https://munus.dev/blog/astro-blog-cloudinary-image-video/)
+
+```
+npm install astro-cloudinary
+```
+
+
 # Astro Starter Kit: Blog
 
 ```sh
