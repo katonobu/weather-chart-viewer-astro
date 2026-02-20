@@ -2,8 +2,8 @@
 import HeaderLink from './HeaderLink.astro';
 ---
 <header>
-	<nav>
-		<div class="internal-links">
+	<nav class="flex justify-center">
+		<div class="flex gap-4">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/weather">Weather</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
@@ -17,11 +17,6 @@ import HeaderLink from './HeaderLink.astro';
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 	nav a {
 		padding: 1em 0.5em;
 		color: var(--black);
@@ -31,10 +26,5 @@ import HeaderLink from './HeaderLink.astro';
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
 	}
 </style>

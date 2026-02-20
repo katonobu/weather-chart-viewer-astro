@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "BUILD_TIME=1967-09-17 astro dev",
     "prebuild": "node tools/fetch_all_detail.cjs",
-    "build": "astro build",
+    "build": "BUILD_TIME=$(date +'%Y-%m-%d %H:%M:%S') astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

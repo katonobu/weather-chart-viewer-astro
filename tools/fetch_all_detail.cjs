@@ -17,13 +17,15 @@ cloudinary.config({
 
 // 3つの時間帯
 const TIME_SLOTS = ["1540", "1000", "0340"];
+// 今日から4日遡った分
+const PAST_DAYS = 4
 
-// 今日から3日遡った分の yyyymmdd を生成
+//指定範囲の yyyymmdd を生成
 function generateDates() {
   const dates = [];
   const today = new Date();
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < PAST_DAYS; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() - i);
 
@@ -53,6 +55,12 @@ async function fetchJsonFromUrl(url) {
       })
       .on("error", reject);
   });
+}
+
+function buildCloudinaryUrl(dir_name, file_name) {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+
+  return `https://res.cloudinary.com/${cloudName}/image/upload/f_auto/weather-chart/${dir_name}/${file_name}`;
 }
 
 async function main() {

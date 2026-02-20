@@ -3,6 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import {get_title_from_dir_name} from '../lib/dir_name_utils';
+import {get_image_url} from '../lib/get_image_url.server'
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -11,15 +13,52 @@ const { metadata } = Astro.props;
 
 <html lang="jp">
 	<head>
-		<BaseHead title={metadata.id + " " + metadata.title} description={metadata.id} />
+		<BaseHead title={get_title_from_dir_name(metadata.id)} description={metadata.id} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>{metadata.title}</h1>
-			<h2>{metadata.released_at_j}</h2>
-			<hr />
-			<slot />
+			<article class="p-4">
+				<a 
+					href={`/weather`}
+					id="top"
+					class="text-blue-500 hover:underline"
+				>日付毎一覧ページへ</a>
+				<h1 class="text-2xl font-bold">{metadata.title}</h1>
+				<p>{metadata.released_at_j}</p>
+
+				<h2 class="text-2xl font-bold">ページ内リンク</h2>
+				<ul class="list-disc text-wrap px-10">
+				{
+					metadata.files.map((item:any) => (
+					<li><a href={`#${item.id}`} class="text-blue-500 hover:underline">{item.title}</a></li>
+					))
+				}
+				</ul>
+				<h2 class="text-2xl font-bold">各画像</h2>
+				{(
+					metadata.files.map((item:any) => (
+						<div>
+							<p><a href="#top" class="text-blue-500 hover:underline">ページの先頭</a></p>
+							<a
+								href={get_image_url(metadata.id, item.name)}
+								target="_blank"
+								id={item.id}
+								class="text-blue-500 hover:underline inline-flex items-center gap-1"
+							>
+								{item.title}
+								<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+								<path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path>
+								</svg>
+							</a>
+							<img width="100%" height="auto" src={get_image_url(metadata.id, item.name)} class="w-full h-auto border-2 border-black"></img>
+						</div>
+					))
+				)}
+				<p><a href="#top" class="text-blue-500 hover:underline">ページの先頭</a></p>
+				<hr />
+				<slot />
+			</article>
 		</main>
 		<Footer />
 	</body>
